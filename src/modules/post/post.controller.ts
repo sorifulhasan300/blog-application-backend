@@ -9,8 +9,8 @@ import { prisma } from "../../lib/prisma";
 
 const createPost = async (req: Request, res: Response, next: NextFunction) => {
   const post = req.body;
-  // const authorId = req.user?.id;
   const user = req.user;
+  console.log(post);
   if (!user) {
     return "user not found";
   }
@@ -62,7 +62,7 @@ const searchPost = async (req: Request, res: Response) => {
       data.skip,
       data.sortBy,
       data.sortOrder,
-      totalItem
+      totalItem,
     );
     res.status(200).json({
       success: true,
@@ -82,7 +82,7 @@ const searchPost = async (req: Request, res: Response) => {
 const getSinglePost = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { id } = req.params;
   if (!id) {
@@ -130,7 +130,7 @@ const updateOwnPost = async (req: Request, res: Response) => {
       data,
       postId,
       authorId,
-      isAdmin
+      isAdmin,
     );
     res.status(200).json({
       success: true,

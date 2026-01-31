@@ -21,11 +21,10 @@ declare global {
 }
 const middleware = (...roles: UserRole[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.headers.cookie;
     if (!token) {
       return res.send("you are not authenticate");
     }
-    console.log(token);
     // decode token
     const session = await auth.api.getSession({
       headers: fromNodeHeaders(req.headers),

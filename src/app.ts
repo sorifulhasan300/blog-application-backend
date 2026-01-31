@@ -9,9 +9,12 @@ import { errorHandler } from "./middlewares/error.middleware";
 const app = express();
 app.use(
   cors({
-    origin: process.env.BETTER_AUTH_URL,
+    origin: [
+      "http://localhost:3000",
+      process.env.BETTER_AUTH_URL || "http://localhost:5000",
+    ],
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 router.all("/api/auth/*splat", toNodeHandler(auth));
